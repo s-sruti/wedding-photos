@@ -1,0 +1,121 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block title%} 
+Wedding Frame Picker| home
+{%endblock%}
+{% block nav%}
+ <header class="navbar">
+  <div class="logo">Wedding Frame Picker</div>
+  <nav>
+    
+      
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how_to">How to Upload</a></li>
+        <li><a href="#footer_nav">Contact</a></li>
+      </ul>
+      
+    
+  </nav>
+ </header>
+{%endblock%}
+{%block content%}
+  {% block upload%}
+  <section id="upload">
+      <div class="hero" style='height:90vh;'>
+        <div class="overlay" style='height:90vh;'></div>
+        <div class="hero-content">
+          <h1>Welcome to Your Wedding Frame Picker</h1>
+          <p>Upload and relive your best wedding memories with AI-powered enhancements</p>
+          <form id='video_upload' action={% url 'upload' %}  method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" id='input_file' name='video' style='display:None;'  onchange="this.form.submit()" required/>
+          
+            <button  class='upload-btn' onclick="document.getElementById('input_file').click();">Upload</button>
+          
+        </form>
+          <div id="fileNames"></div>
+        </div>
+      </div>
+    </section>
+  {% endblock %}
+      <!-- Features Section -->
+    <!-- Features Section -->
+  
+    <section class="features-section" id="features">
+      <h2>What We Offer</h2>
+    
+      <div class="carousel-wrapper">
+        <button class="carousel-btn left" onclick="scrollCarousel(-1)">&#10094;</button>
+        <div class="features-container" id="featureSlider">
+          <!-- Same feature cards here -->
+          <div class="feature-card">
+            <img src="{% static 'images/smart.jpg' %}" alt="Smart Uploads">
+            <h3>Smart Scene Selection</h3>
+            <p>Automatically identify and extract the most memorable scenes from your wedding videos using AI.</p>
+          </div>
+          <div class="feature-card">
+            <img src="{% static 'images/asthetic frame.jpg' %}" alt="AI Enhancements">
+            <h3>Aesthetic Frame Detection</h3>
+            <p>Capture only the best moments—blurry frames are out, clear and beautiful frames are in.</p>
+          </div>
+          <div class="feature-card">
+            <img src="{% static 'images/album.jpg' %}" alt="Personalized Timeline">
+            <h3>Personalized Album Curation</h3>
+            <p>Get a curated collection of your best wedding memories without lifting a finger.
+            </p>
+          </div>
+          <div class="feature-card">
+            <img src="{% static 'images/in browser.jpg' %}" alt="More Memories">
+            <h3>In-Browser Image Editor</h3>
+            <p>Edit your favorite frames with filters, adjustments, and artistic tools—no software needed.</p></div>
+          <div class="feature-card">
+            <img src="{% static 'images/fast_lightweight.jpg' %}" alt="More Memories">
+            <h3>Instant Download & Mobile Friendly</h3>
+            <p>Download your edits instantly on any device—optimized for smooth experience across phones, tablets, and desktops.</p>
+          </div>
+          <!-- Add more if needed -->
+        </div>
+        <button class="carousel-btn right" onclick="scrollCarousel(1)">&#10095;</button>
+      </div>
+    
+  
+    </section>
+    <section class="how_to_upload" id="how_to">
+      <div class="how-to-section" id="how_to">
+        <div class="how-to-container">
+          <div class="how-to-text">
+            <h2>How to Use Wedding Frame Picker?</h2>
+      
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>Upload Your Wedding Video</h3>
+                <p>Click <a href="#upload"> <b> Upload</b> </a> , choose your wedding video from your local files or Google Drive, and let our tool scan for highlight-worthy frames.</p>
+              </div>
+            </div>
+      
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>AI Filters the Best Frames</h3>
+                <p>Our AI filters through thousands of frames based on sharpness, contrast, and aesthetic quality to shortlist only the best moments.</p>
+              </div>
+            </div>
+      
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Edit & Download</h3>
+                <p>Preview all selected frames and edit according to your need. Download them in full resolution — perfect for photo albums or social media sharing.</p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="how-to-image">
+            <img src="{% static 'images/upload.jpg' %}" alt="Upload & Preview Interface">
+          </div>
+        </div>
+      </div>
+    </section>
+{%endblock%}

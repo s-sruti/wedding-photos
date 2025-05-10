@@ -1,0 +1,64 @@
+__pycache__/
+*.pyc
+env
+*.log
+venv/
+.idea/
+.DS_Store
+wedding_photo_extractor/media
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables and secrets
+.env
+
+# Database (if using SQLite)
+*.sqlite3
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Static files (generated or collected)
+staticfiles/
+static_root/
+
+
+# Media files (user-uploaded content)
+media/
+
+# Logs
+*.log
+
+# Coverage reports
+htmlcov/
+coverage.xml
+*.cover
+
+# Pytest and testing
+.pytest_cache/
+.tox/
+
+# Local config
+*.local
+
+# Compiled translations
+*.mo

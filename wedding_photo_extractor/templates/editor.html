@@ -1,0 +1,474 @@
+{%extends 'base.html' %}
+{%load static %}
+{% block nav%}
+{% endblock %}
+{%block title%} 
+Wedding Frame Picker| editor
+{%endblock%}
+{% block content %}
+<style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color:#FFE3D0;
+    }
+  
+    .sidebar {
+    
+      width: 220px;
+      margin-top:15px;
+      height:95%;
+      background: #fff;
+      border-right: 1px solid #ccc;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .thumbs {
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+  
+    .thumb{
+      width:35px;
+      height:25px;
+    }
+  
+    .download-btn {
+      padding: 10px;
+      background: #ff9f9a;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .download-btn:hover {
+        background:rgb(249, 127, 120);
+    }
+  
+    .editor-area {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      padding: 15px;
+      gap: 20px;
+      background:#FFE3D0;
+    }
+  
+    .canvas-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      border: 1px dashed #aaa;
+      min-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  
+    .canvas-container img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 6px;
+    }
+  
+    .tools {
+      width: 280px;
+      background: #fff;
+      border-left: 1px solid #ccc;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .tools h3 {
+      margin: 0;
+      margin-bottom: 10px;
+      color: #333;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+  
+    .tool {
+      background: #FFE3D0;
+      padding: 10px 12px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+  
+    .tool label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+    }
+  
+    input[type="range"],
+    input[type="number"] {
+      width: 100%;
+      border: none;
+      padding: 6px;
+      border-radius: 6px;
+      background:rgb(250, 250, 250);
+      appearance: none;
+      outline: none;
+    }
+  
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      height: 14px;
+      width: 14px;
+      background: #ff9f9a;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 2px #0003;
+    }
+  
+    .tool button {
+      background-color: #ff9f9a;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      padding: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s ease;
+    }
+  
+    .tool button:hover {
+      background-color:rgb(249, 127, 120);
+    }
+  
+    .save-delete {
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  
+    .save-delete button {
+      flex: 1;
+      margin: 5px 2px;
+      padding: 8px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .resize-inputs {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    }
+
+    .resize-inputs input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+
+    .save-btn {
+      background-color: #28a745;
+      width:120px;
+    }
+    .save-btn:hover{
+        background-color:rgb(10, 62, 22);
+    }
+    .delete-btn {
+      background-color:rgb(255, 51, 72);
+    }
+    .delete-btn:hover {
+        background-color:rgb(148, 42, 52);
+      }
+      .image_line{
+        margin-top:5px;
+        display:flex;
+        flex-direction:row;
+        justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+      }
+      .image_line:hover {
+        border: 1px solid #000;
+        border-radius: 5px;
+        cursor:pointer;
+      }
+      .image_line:
+      .delete_icon{
+        padding: 0px 0px  0px 12px;
+        border:none;
+        background-color: transparent;
+        outline: none; 
+      }
+      .image_line.selected {
+        border: 2px solid #000; 
+        border-radius: 5px;
+      }
+      .flip-hori,flip-ver{
+        margin-top:5px;
+      }
+  </style>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Images</h3>
+    <div class="thumbs">
+        {% for evg,name in images%}
+    <div class='image_line' id={{evg}} >
+      <img src={{evg}} class="thumb" alt="name" onclick="loadImageToCanvas('{{evg|urlencode}}') ">
+      <span onclick="loadImageToCanvas('{{evg|urlencode}}')">{{name}} </span>
+      <button class='delete_icon' onclick="delete_image('{{evg|urlencode}}')">🗑️</button>
+    </div>
+      {% endfor %}
+    
+    </div>
+    <button class="download-btn" onclick="download_zip()"> Download ZIP</button>
+  </div>
+  
+
+  <!-- Main Editor -->
+  <div class="editor-area">
+
+    <!-- Image Display -->
+    <div class="canvas-container">
+      <img id="mainImage" src="" ><p id="para">Please select an image</p>
+
+      
+    </div>
+
+    <!-- Tools -->
+    <div class="tools">
+      <h3>Editor Tools</h3>
+
+      <div class="tool">
+        <div class="flip">
+          <label>Flip</label>
+          <p></p>
+          <button class="flip-hori" onclick="flipImage('horizontal')">horizontal</button>
+          <button class="flip-ver" onclick="flipImage('vertical')">vertical</button>
+        </div>
+      </div>
+
+      <div class="tool">
+        <label>Brightness</label>
+        <input type="range" id="brightnessSlider" min="0" max="200" value="100">
+      </div>
+
+      <div class="tool">
+        <label>Contrast</label>
+        <input type="range" id="contrastSlider" min="0" max="200" value="100">
+      </div>
+
+      <div class="tool">
+        
+        <label>Resize</label>
+        <div class="resize-inputs">
+        <input type="number" id="resizeWidth" placeholder="Width (px)">
+        <input type="number" id="resizeHeight" placeholder="Height (px)">
+        </div>
+        <button onclick="alert('Resize feature coming soon!')">Apply Resize</button>
+
+      </div>
+
+      <div class="tool" style='background-color:#fff;'>
+        
+        <button onclick="alert('Crop tool coming soon!')">Crop</button>
+      </div>
+
+      <div class="save-delete">
+        
+        <button type="submit" class="save-btn" onclick="save_image()"> Save</button>
+        
+        <button class="delete-btn" onclick='resetTransformations()'> Reset </button>
+      </div>
+    </div>
+
+  </div>
+  <canvas id="canvas" style="display:none;"></canvas>
+<script>
+  const mainImage = document.getElementById("mainImage");
+
+  // Thumbnail click change image
+  document.querySelectorAll(".thumb").forEach(img => {
+    img.addEventListener("click", () => {
+      mainImage.src = img.src;
+    });
+  });
+  function updateImageStyles(currentBrightness,currentContrast) {
+    
+    mainImage.style.filter = `brightness(${currentBrightness}%) contrast(${currentContrast}%)`;
+  }
+
+ 
+  
+  // Brightness & Contrast
+  document.getElementById("brightnessSlider").addEventListener("input", updateFilters);
+  document.getElementById("contrastSlider").addEventListener("input", updateFilters);
+
+  function updateFilters() {
+    const brightness = document.getElementById("brightnessSlider").value;
+    const contrast = document.getElementById("contrastSlider").value;
+    updateImageStyles( brightness,contrast);
+  }
+
+  function loadImageToCanvas(imageSrc) {
+    imageSrc=decodeURIComponent(imageSrc)
+    console.log(imageSrc);
+    const mainImage = document.getElementById("mainImage");
+    mainImage.src = imageSrc ;
+    const allPanelImages = document.querySelectorAll('.image_line');
+    allPanelImages.forEach(img => img.classList.remove('selected'));
+    const selcted_image = document.getElementById(imageSrc);
+    selcted_image.classList.add('selected');
+    resetTransformations();
+    const para= document.getElementById("para");
+    para.style.display="none";
+  }
+  function resetTransformations() {
+    
+    const image=document.getElementById("mainImage");
+    image.dataset.flipH=false;
+    image.dataset.flipV=false;
+    currentBrightness = 100;
+    currentContrast = 100;
+    image.style.transform = 'scaleX(1) scaleY(1)';
+   document.getElementById("brightnessSlider").value = 100;
+   document.getElementById("contrastSlider").value = 100;
+    updateImageStyles(100,100);
+  }
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+          cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  
+  function save_image() {
+    const img = document.getElementById('mainImage');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    img.onload = function () {
+      const imgStyle = window.getComputedStyle(img);
+      const filter = imgStyle.filter; // e.g. brightness(1.2) contrast(1.5)
+      const flipH = img.dataset.flipH;
+      const flipV =img.dataset.flipV;
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      ctx.filter = filter;
+      
+      let translateX; 
+      let translateY;
+      if (flipH==='true'){ctx.transform(-1, 0, 0, 1, canvas.width, 0);}
+      
+      if (flipV==='true'){ctx.transform(1, 0, 0, -1, 0, canvas.height);
+      }
+      if  (flipV==="true" && flipH==="true"){
+        ctx.setTransform(-1, 0, 0, -1, canvas.width, canvas.height);
+      }
+      
+      ctx.save();
+      ctx.drawImage(img,0,0);
+      const dataURL = canvas.toDataURL("image/png");
+      console.log(dataURL);
+      const csrfToken = getCookie('csrftoken');
+      const path=img.src.split(':8000')[1];
+      
+      fetch("/save_image/", {
+      method: "POST",
+      body: JSON.stringify({ image: dataURL,path:path}),
+      headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken,  
+      },
+    });
+    };
+    if (img.complete) {
+      img.onload();
+    }
+    alert('Changes Saved!!! ');
+    window.location.reload(); 
+    
+  }
+  function delete_image(imageSrc){
+    const csrfToken = getCookie('csrftoken');
+    imageSrc=decodeURIComponent(imageSrc).split("?")[0]
+    console.log(imageSrc);
+    fetch("/delete_image/", {
+      method: "POST",
+      body: JSON.stringify({path:imageSrc}),
+      headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken,  
+      },
+    });
+    alert('Image Deleted !!! ');
+    window.location.reload(); 
+  }
+  
+  function download_zip(folderName) {
+    const url = `/download-zip/`;
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', '');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    }
+
+  function flipImage(direction) {
+    const image = document.getElementById('mainImage');
+
+    let isFlippedH = image.dataset.flipH ;
+    let isFlippedV = image.dataset.flipV ;
+    let scaleX =  1;
+    let scaleY =  1;
+    
+    if (direction === 'horizontal') {
+      if(isFlippedH === 'false')
+        {isFlippedH = 'true';
+        scaleX=-1;}
+      else
+        {isFlippedH = 'false';
+        scaleX=1;}
+      image.dataset.flipH = isFlippedH;
+    }
+    if (direction === 'vertical') {
+      if(isFlippedV === 'false')
+        {isFlippedV = 'true';
+        scaleY=-1;}
+      else
+        {isFlippedV = 'false';
+        scaleY=1;}
+      image.dataset.flipV = isFlippedV;
+    }
+    console.log(isFlippedH,isFlippedV);
+    image.dataset.scaleX=scaleX;
+    image.dataset.scaleY=scaleY;
+    image.style.transform = `scale(${scaleX}, ${scaleY})`;
+}
+
+
+  
+</script>
+{% endblock %}
+{% block footer%}
+{% endblock %}

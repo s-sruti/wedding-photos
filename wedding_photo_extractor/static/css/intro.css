@@ -1,0 +1,402 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+ 
+}
+
+
+
+body, html {
+  
+  height: 100%;
+  background-color:#ffffff; 
+
+}
+
+.how-to-section a{
+  
+  text-decoration: none;
+  color:#000000;
+ 
+}
+/* Navbar */
+.navbar {
+  
+  position:absolute;
+  top: 0;
+  width: 100%;
+  background: transparent;
+  color: rgb(0, 0, 0);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+}
+
+.nav-links li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #ff9f9a; /* Peach Hover */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+/* Hero */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  color: #000000;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #FFE3D0; 
+  z-index: 1; 
+}
+
+.hero-content {
+  z-index: 2;
+  max-width: 700px;
+  padding: 2rem;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: fadeIn 1.2s ease;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 2s ease;
+}
+
+.upload-btn {
+  background: #000000;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.upload-btn:hover {
+  background: #ff9f9a;
+  color:#000000;
+}
+
+.upload-btn input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Features */
+.features-section {
+  margin-top:20px;
+  padding: 4rem 2rem;
+  background-color: #FCFCFC; /* Soft White */
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #1C1C1C; /* Black */
+}
+
+.features-container {
+ 
+  
+  
+  gap: 2rem;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.carousel-wrapper {
+ 
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: 100%;
+    padding: 0 2rem;
+  
+}
+
+.carousel-buttons {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.carousel-buttons button {
+  padding: 10px 15px;
+  background-color: #ff9f9a;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.carousel-buttons button:hover {
+  background-color: #e98585;
+}
+
+
+.feature-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+  padding: 1.5rem;
+  text-align: left;
+  transition: transform 0.3s;
+
+    flex: 0 0 auto;
+    width: 300px;
+    margin-right: 1.5rem;
+  
+}
+.carousel-btn {
+  background-color: #ff9f9a;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  z-index: 2;
+  transition: background 0.3s;
+}
+
+.carousel-btn:hover {
+  background-color: #f59995;
+}
+
+.carousel-btn.left {
+  position: absolute;
+  left: 0;
+}
+
+.carousel-btn.right {
+  position: absolute;
+  right: 0;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #1C1C1C; /* Black */
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #555;
+}
+.feature-buttons {
+  margin-top: 200px;
+  
+}
+.features-container::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+.feature-buttons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #ff9f9a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.feature-buttons button:hover {
+  background-color: #f59995;
+}
+/* Footer */
+.footer {
+  background-color: rgba(255, 255, 255, 0.6); /* Black */
+  color: #000000; /* Peach */
+  padding: 2rem;
+  text-align: center;
+
+  
+  bottom: 0; 
+  width: 100%;
+}
+
+
+.footer-links {
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  color: #000000; /* Peach */
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.footer-links a:hover {
+  
+  text-decoration: underline;
+}
+.how-to-section {
+ background-color: #FFE3D0;
+  padding: 4rem 2rem;
+}
+
+.how-to-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.how-to-text {
+  flex: 1 1 500px;
+}
+
+.how-to-text h2 {
+  font-size: 2.4rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.step {
+  display: flex;
+  margin-bottom: 1.8rem;
+}
+
+.step-number {
+  font-size: 1.4rem;
+  color: white;
+  background-color: #ff9393;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 38px;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.step-content h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.step-content p {
+  margin: 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.how-to-image {
+  flex: 1 1 400px;
+  text-align: center;
+}
+
+.how-to-image img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.message {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.thumbnail-container {
+  width: 320px;
+  height: 180px;
+  border: 2px solid #ccc;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

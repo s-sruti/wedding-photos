@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title%}Wedding Frame Picker | home{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/intro.css' %}" />
+</head>
+<body>
+  {% block nav%}
+   <header class="navbar">
+    <div class="logo">Wedding Frame Picker</div>
+    <nav>
+      
+        
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how_to">How to Upload</a></li>
+          <li><a href="#footer_nav">Contact</a></li>
+        </ul>
+        
+      
+    </nav>
+   </header>
+  {% endblock %}
+  {% block content%}
+
+  {%endblock%}
+  {%block footer%}
+  <section id="footer_nav">
+    <footer class="footer">
+      <p>&copy; 2025 Wedding Frame Picker. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </footer>
+  </section>
+   
+{% endblock %}
+  
+  <script src="{% static 'js/intro.js' %}"></script>
+  </body>
+  </html> 
