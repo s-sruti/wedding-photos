@@ -126,3 +126,6 @@ def show_images(url):
             image_files.append(src)
             file_names.append(os.path.basename(f))
     return {'images': image_files, 'file_names': file_names}
+
+def resize_image():
+    pass

@@ -13,7 +13,7 @@ urlpatterns=[
     path('save_image/',views.save_images),
     path('delete_image/',views.delete_image),
     path('download-zip/', views.zip_directory),
-   
+    path('/resize',views.resize_image)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
