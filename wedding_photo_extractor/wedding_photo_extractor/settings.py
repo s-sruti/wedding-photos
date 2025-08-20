@@ -22,12 +22,12 @@ print(BASE_DIR)
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b=q5^cb%tnoi(bagr3n6b#+p%4cf#51h*t7!_ndfc8@jzacqiu'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-dev-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://wedding-photo-extractor.onrender.com']
 
 
 # Application definition
