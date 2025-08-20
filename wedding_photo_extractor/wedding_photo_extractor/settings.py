@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-dev-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://wedding-photo-extractor.onrender.com']
+ALLOWED_HOSTS = ['wedding-photo-extractor.onrender.com']
 
 
 # Application definition
