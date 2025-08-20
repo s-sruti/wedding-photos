@@ -1,5 +1,10 @@
 asgiref==3.8.1
+dj-database-url==3.0.1
 Django==5.2
+gunicorn==23.0.0
+numpy==2.2.5
 opencv-python==4.11.0.86
+packaging==25.0
 sqlparse==0.5.3
 tzdata==2025.2
+whitenoise==6.9.0
